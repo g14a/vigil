@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"vigil/client"
 	"vigil/utils"
@@ -42,24 +41,23 @@ func GetIndiceInfo() []IndexInfo {
 	return nil
 }
 
-func GetDocumentsFromIndex(index string) {
+func GetDocumentsFromIndex(index, queryDSL string, from, size int) {
 	var buf bytes.Buffer
 
 	query := map[string]interface{}{
 		"query": map[string]interface{}{
 			"query_string": map[string]interface{}{
-				"query": "*",
+				"query": queryDSL,
 			},
 		},
-		"size": 10,
+		"from": from,
+		"size": size,
 	}
 
 	if err := json.NewEncoder(&buf).Encode(query); err != nil {
 		utils.CheckError(err)
 	}
-
-	fmt.Println(buf.String())
-
+	
 	es := client.ESClient
 
 	res, err := es.Search(
@@ -72,5 +70,9 @@ func GetDocumentsFromIndex(index string) {
 
 	utils.CheckError(err)
 
-	fmt.Println(res.String())
+	var m map[string]interface{}
+
+	if err := json.NewDecoder(res.Body).Decode(&m); err != nil {
+		utils.CheckError(err)
+	}
 }

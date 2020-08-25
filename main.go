@@ -9,11 +9,11 @@ import (
 
 func main() {
 	client.InitESClient()
-	// service.GetIndiceInfo()
-	//
-	// service.GetDocumentsFromIndex("heroku_2r69v17f.candidates")
+
+	service.GetDocumentsFromIndex("twitter", "*", 10, 20)
+	
 	n, err := service.GetNodesStats()
 	utils.CheckError(err)
-	
+
 	fmt.Println(n)
 }

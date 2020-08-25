@@ -41,6 +41,6 @@ func GetNodesStats() (*[]NodeStats, error) {
 
 		return &nodeStat, nil
 	}
-	
+
 	return nil, nil
 }

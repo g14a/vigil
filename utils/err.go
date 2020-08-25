@@ -1,11 +1,11 @@
 package utils
 
 import (
-	"fmt"
+	"log"
 )
 
 func CheckError(err error) {
 	if err != nil {
-		fmt.Printf("%v", err)
+		log.Println(err)
 	}
 }
