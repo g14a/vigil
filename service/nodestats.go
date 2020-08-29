@@ -6,7 +6,7 @@ import (
 	"vigil/utils"
 )
 
-// Gives out an array on stats depending on the number of nodes present in the cluster.
+// GetNodesStats gives out an array on stats depending on the number of nodes present in the cluster.
 // Gives a single entity for a standalone node
 func GetNodesStats() (*[]NodeStats, error) {
 	url := utils.GetUrlFromString(

@@ -57,7 +57,7 @@ func GetDocumentsFromIndex(index, queryDSL string, from, size int) {
 	if err := json.NewEncoder(&buf).Encode(query); err != nil {
 		utils.CheckError(err)
 	}
-	
+
 	es := client.ESClient
 
 	res, err := es.Search(
